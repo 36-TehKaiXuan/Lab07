@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
@@ -10,6 +11,10 @@ public class Player : MonoBehaviour
     //Jump
     public int JumpForce;
     private Rigidbody rb;
+
+    //Score
+    private int Score;
+    public Text ScoreText;
 
     void Start()
     {
@@ -22,7 +27,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Space))
         { 
             if (gameObject.transform.position.y < 3.5)
@@ -43,6 +47,8 @@ public class Player : MonoBehaviour
             //Lose
             SceneManager.LoadScene("LoseScene");
         }
+
+        ScoreText.text = "Score: " + Score;
     }
 
     //Collision with obstacle
@@ -51,6 +57,13 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Avoid")
         {
             SceneManager.LoadScene("LoseScene");
+        }
+    }
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag == "Avoid")
+        {
+            Score++;
         }
     }
 }

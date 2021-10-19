@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour
 
     public void UpdateScore(int value)
     {
-        Score += value;
-        Txt_Score.text = "SCORE : " + Score;
+        //Score += value;
+        //Txt_Score.text = "SCORE : " + Score;
     }
 
     private void StartGame()
