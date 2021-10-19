@@ -44,4 +44,13 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene("LoseScene");
         }
     }
+
+    //Collision with obstacle
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Avoid")
+        {
+            SceneManager.LoadScene("LoseScene");
+        }
+    }
 }
