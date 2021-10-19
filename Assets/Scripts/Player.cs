@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -21,15 +22,26 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //Make the bird "Fly"
-            //transform.position += transform.up * JumpForce * Time.deltaTime;
-            rb.AddForce(Vector3.up * JumpForce);
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        { 
+            if (gameObject.transform.position.y < 3.5)
+            {
+                rb.AddForce(Vector3.up * JumpForce);
+            }
+            if (gameObject.transform.position.y > 3.5)
+            {
+                rb.velocity = Vector3.zero;
+            }
             //Animation
             thisAnimation.Play();
         }
-            
+        //-4.5
+        //Lose Condition by falling
+        if (gameObject.transform.position.y < -4.5)
+        {
+            //Lose
+            SceneManager.LoadScene("LoseScene");
+        }
     }
 }
